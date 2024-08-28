@@ -7,15 +7,8 @@ export const Todo = () => {
 
     const [inpVal, setInpVal] = useState("");
 
-    var data = "TodoData"
-    // get localStorage
-    const [task, setTask] = useState(() => {
-        const saveTasks = localStorage.getItem(data);
-        return saveTasks ? JSON.parse(saveTasks) : [];
-    });
 
-    // set localStorage
-    localStorage.setItem(data, JSON.stringify(task));
+    const [task, setTask] = useState([])
 
     // Handle Input Value
     const handleInpVal = (val) => {
@@ -25,7 +18,7 @@ export const Todo = () => {
     // Handle Form Submit
     const handleFormSubmit = (event) => {
         event.preventDefault();
-        if (inpVal == "") {
+        if (inpVal === "") {
             alert("Type Something");
             return;
         }
@@ -33,10 +26,12 @@ export const Todo = () => {
             alert("Same task can't be added");
             setInpVal("");
             return;
-        };
+        }
         setTask((prev) => [...prev, inpVal]);
         setInpVal("");
     };
+
+
 
     // Handle Delete Button
     const handleDelValue = (val) => {
@@ -49,7 +44,6 @@ export const Todo = () => {
             <div className="flex flex-col md:flex-row justify-around items-center pt-10 h-screen">
                 <div>
                     <h1 className="text-7xl font-bold text-white">TO DO LIST</h1>
-                    <h1 className="text-5xl font-bold py-6 text-white">WITH LOCAL STORAGE</h1>
                     <h1 className="text-5xl p-3 rounded-md bg-black w-fit text-white font-bold">React and Tailwind</h1>
                 </div>
                 <div className="bg-white bg-opacity-60 w-2/5 rounded-md p-5 mt-3">
